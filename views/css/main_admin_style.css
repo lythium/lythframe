@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+#upload_image {
+    max-width: 100%!important;
+    height: auto!important;
+    margin: auto;
+}
+.image_group {
+    position: relative;
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+#close_upload {
+    font-weight: 900;
+    color: red;
+    position: absolute;
+    right: 5px;
+    top: 5px
+}
