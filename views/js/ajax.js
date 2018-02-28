@@ -7,6 +7,7 @@ jQuery(document).ready( function($){
       $data.push(
           {name: 'action', value: 'validateProcess'}
       );
+      console.log($data);
 
       $.ajax({
         url: ajax_object.ajaxurl,
@@ -14,7 +15,7 @@ jQuery(document).ready( function($){
         dataType: 'JSON',
         data: $data,
         success: function(response){
-          console.log(response);
+          console.log(response.return);
         },
         error: function(errorThrown){
            alert(errorThrown);

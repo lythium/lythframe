@@ -11,18 +11,20 @@ class LythFrameValidate
     }
     static function validateProcess()
     {
-        if (isset($_POST) && !empty($_POST)) {
-            die(json_encode(array(
-                'return' => true,
-                'message' => 'success'
-            )));
-        } else {
+        if (!isset($_POST) && empty($_POST)) {
             die(json_encode(array(
                 'return' => false,
                 'error' => 'error'
             )));
         }
         die();
+    }
+    public function cleanNonUnicode($pattern)
+    {
+        if (!defined('PREG_BAD_UTF8_OFFSET')) {
+            return $pattern;
+        }
+        return preg_replace(cleanNonUnicode('/\\\[px]\{[a-z]{1,2}\}|(\/[a-z]*)u([a-z]*)$/i', '$1$2'), $pattern);
     }
     public static function isNumeric($value)
     {
@@ -35,6 +37,10 @@ class LythFrameValidate
     public static function isUrl($url)
     {
         return preg_match('/^[~:#,$%&_=\(\)\.\? \+\-@\/a-zA-Z0-9\pL\pS-]+$/u', $url);
+    }
+    public static function isGenericName($name)
+    {
+        return empty($name) || preg_match(cleanNonUnicode('/^[^<>={}]*$/u'), $name);
     }
     public static function isPattern($pattern, int $hits)
     {
