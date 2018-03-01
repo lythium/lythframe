@@ -6,18 +6,21 @@ class LythFrameValidate
 {
     function __construct()
     {
-        add_action( 'wp_ajax_validateProcess', 'validateProcess' );
-        add_action( 'wp_ajax_nopriv_validateProcess', 'validateProcess' );
+        add_action( 'wp_ajax_validateProcess', array($this, 'validateProcess' ));
+        add_action( 'wp_ajax_nopriv_validateProcess', array($this, 'validateProcess' ));
     }
-    static function validateProcess()
+    public static function validateProcess()
     {
-        if (!isset($_POST) && empty($_POST)) {
+        if (!isset($_POST['unit_name']) || empty($_POST['unit_name'])) {
             die(json_encode(array(
                 'return' => false,
                 'error' => 'error'
             )));
         }
-        die();
+        die(json_encode(array(
+            'return' => true,
+            'message' => 'success'
+        )));
     }
     public function cleanNonUnicode($pattern)
     {

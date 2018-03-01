@@ -145,9 +145,9 @@ class LythFrame
     {
         wp_register_script( 'ajaxHandle', get_site_url() . '/wp-content/plugins/lythframe/views/js/ajax.js', array(), false, true );
         wp_enqueue_script( 'ajaxHandle' );
+        wp_localize_script( 'ajaxHandle', 'ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
         wp_register_style( 'lythframeadmincss', get_site_url() . '/wp-content/plugins/lythframe/views/css/main_admin_style.css' );
         wp_enqueue_style( 'lythframeadmincss' );
-        wp_localize_script( 'ajaxHandle', 'ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
     }
 
     static function lythFrameList()

@@ -3,7 +3,7 @@ jQuery(document).ready( function($){
 
     $addform.submit(function(e) {
       e.preventDefault();
-      var $data = $addform.serializeArray();
+      var $data = $(this).serializeArray();
       $data.push(
           {name: 'action', value: 'validateProcess'}
       );
@@ -14,11 +14,15 @@ jQuery(document).ready( function($){
         type: 'POST',
         dataType: 'JSON',
         data: $data,
-        success: function(response){
-          console.log(response.return);
+        success: function(data){
+            if (data.return) {
+                console.log(data.message);
+            } else {
+                console.log(data.error);
+            }
         },
-        error: function(errorThrown){
-           alert(errorThrown);
+        error: function(XHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
         }
       });
     });
