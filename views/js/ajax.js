@@ -1,30 +1,57 @@
 jQuery(document).ready( function($){
-    var $addform = $('#addtolist');
+    var $addform = $('#addtolist'),
+        $success = $('#lythframe_success p'),
+        $error = $('#lythframe_error p'),
+        $closeMessage = $('.alert .icon-cancel-circled');
 
     $addform.submit(function(e) {
-      e.preventDefault();
-      var $data = $(this).serializeArray();
-      $data.push(
-          {name: 'action', value: 'validateProcess'}
-      );
-      console.log($data);
+        $('#add_btn').prop('disabled', true);
+        $('#add_btn i').css('display', 'block');
+        $('#add_btn .icon_text').css('display', 'none');
+        e.preventDefault();
+        $success.parent().css('display', 'none');
+        $error.parent().css('display', 'none');
+        var $data = $(this).serializeArray();
+        $data.push(
+            {name: 'action', value: 'validateProcess'}
+        );
+        console.log($data);
 
-      $.ajax({
-        url: ajax_object.ajaxurl,
-        type: 'POST',
-        dataType: 'JSON',
-        data: $data,
-        success: function(data){
-            if (data.return) {
-                console.log(data.message);
-            } else {
-                console.log(data.error);
-            }
-        },
-        error: function(XHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
-        }
-      });
+        setTimeout(function(){
+            $.ajax({
+                url: ajax_object.ajaxurl,
+                type: 'POST',
+                dataType: 'JSON',
+                data: $data,
+                success: function(data){
+                    if (data.return) {
+                        console.log(data.message);
+                        $success.html(data.message);
+                        $success.parent().css('display', 'block');
+
+                    } else {
+                        console.log(data.error);
+                        $error.html(data.error);
+                        $error.parent().css('display', 'block');
+                    }
+                    $('#add_btn i').css('display', 'none');
+                    $('#add_btn .icon_text').css('display', 'block');
+                    $('#add_btn').prop('disabled', false);
+                },
+                error: function(XHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                    $('#add_btn i').css('display', 'none');
+                    $('#add_btn .icon_text').css('display', 'block');
+                    $('#add_btn').prop('disabled', false);
+                }
+            });
+        }, 2000);
+    });
+
+    $closeMessage.on('click', function(e){
+        e.preventDefault();
+        $(this).parent().css('display', 'none');
+        $(this).parent().children('p').html('');
     });
 
     $('#upload-btn').click(function(e) {

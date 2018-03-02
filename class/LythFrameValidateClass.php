@@ -11,23 +11,61 @@ class LythFrameValidate
     }
     public static function validateProcess()
     {
-        if (!isset($_POST['unit_name']) || empty($_POST['unit_name'])) {
+        if (!isset($_POST['unit_name']) || empty($_POST['unit_name']) || !$this->isGenericName($_POST['unit_name'])) {
             die(json_encode(array(
                 'return' => false,
-                'error' => 'error'
+                'error' => 'Name invalid'
+            )));
+        }
+        if (!isset($_POST['image_url']) || empty($_POST['image_url']) || !$this->isUrl($_POST['image_url'])) {
+            die(json_encode(array(
+                'return' => false,
+                'error' => 'mail invalid'
+            )));
+        }
+        if (!isset($_POST['spell_name_en']) || empty($_POST['spell_name_en']) || !$this->isGenericName($_POST['spell_name_en'])) {
+            die(json_encode(array(
+                'return' => false,
+                'error' => 'Spell Name EN invalid'
+            )));
+        }
+        if (!empty($_POST['spell_name_fr'])) {
+            if (!$this->isGenericName($_POST['spell_name_fr'])) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'Spell Name FR invalid'
+                )));
+            }
+        }
+        if (!isset($_POST['hits']) || empty($_POST['hits']) || !$this->isNumeric($_POST['hits'])) {
+            die(json_encode(array(
+                'return' => false,
+                'error' => 'Hits invalid'
+            )));
+        } else {
+            if (!isset($_POST['frame_delay_hit']) || empty($_POST['frame_delay_hit']) || !$this->isPattern($_POST['frame_delay_hit'], $_POST['hits'])) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'Frame Delay Hiy invalid'
+                )));
+            }
+            if (!isset($_POST['frame_pattern']) || empty($_POST['frame_pattern']) || !$this->isPattern($_POST['frame_pattern'], $_POST['hits'])) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'Frame Pattern invalid'
+                )));
+            }
+        }
+        if (!isset($_POST['spell_frame']) || empty($_POST['spell_frame']) || !$this->isNumeric($_POST['spell_frame'])) {
+            die(json_encode(array(
+                'return' => false,
+                'error' => 'Spell Frame invalid'
             )));
         }
         die(json_encode(array(
             'return' => true,
             'message' => 'success'
         )));
-    }
-    public function cleanNonUnicode($pattern)
-    {
-        if (!defined('PREG_BAD_UTF8_OFFSET')) {
-            return $pattern;
-        }
-        return preg_replace(cleanNonUnicode('/\\\[px]\{[a-z]{1,2}\}|(\/[a-z]*)u([a-z]*)$/i', '$1$2'), $pattern);
     }
     public static function isNumeric($value)
     {
@@ -43,7 +81,7 @@ class LythFrameValidate
     }
     public static function isGenericName($name)
     {
-        return empty($name) || preg_match(cleanNonUnicode('/^[^<>={}]*$/u'), $name);
+        return preg_match("/^[a-zA-ZÀ-ÿ'. -]+$/", $name);
     }
     public static function isPattern($pattern, int $hits)
     {
