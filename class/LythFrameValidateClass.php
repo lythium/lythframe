@@ -46,7 +46,7 @@ class LythFrameValidate
             if (!isset($_POST['frame_delay_hit']) || empty($_POST['frame_delay_hit']) || !$this->isPattern($_POST['frame_delay_hit'], $_POST['hits'])) {
                 die(json_encode(array(
                     'return' => false,
-                    'error' => 'Frame Delay Hiy invalid'
+                    'error' => 'Frame Delay Hit invalid'
                 )));
             }
             if (!isset($_POST['frame_pattern']) || empty($_POST['frame_pattern']) || !$this->isPattern($_POST['frame_pattern'], $_POST['hits'])) {
@@ -83,18 +83,17 @@ class LythFrameValidate
     {
         return preg_match("/^[a-zA-ZÀ-ÿ'. -]+$/", $name);
     }
-    public static function isPattern($pattern, int $hits)
+    public static function isPattern( string $pattern, int $hit_count)
     {
-        $pattern = explode('-', $pattern);
-        $count = count($pattern);
-        if ($hits != $count) {
+        if (!preg_match('/^\d+(?:-\d+)*$/', $pattern)) {
             return false;
         }
-        foreach ($pattern as $key => $value) {
-            if (!is_numeric($value)) {
-                return false;
-            }
+        $hits = explode('-', $pattern);
+
+        if ($hit_count !== count($hits)) {
+            return false;
         }
+
         return true;
     }
 }
