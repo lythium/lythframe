@@ -42,13 +42,16 @@ div.alert-success {
 div.alert-error {
     border-left: 4px solid red;
 }
+#field_0 {
+    width: 5%;
+}
 #field_1, #field_2,#field_8,#field_4 {
     width: 10%;
 }
 #field_3, #field_5,#field_7, #field_6 {
     width: 15%;
 }
-#form_addtolist th input, #form_addtolist th button {
+#form_addtolist th input, #form_addtolist th button, #lythframe-list th button {
     width: 100%!important;
 }
 #form_addtolist th input {
