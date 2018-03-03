@@ -67,19 +67,18 @@ class LythFrameSettings
                 if (!$obj->add()) {
                     die(json_encode(array(
                         'return' => false,
-                        'error' => $a
+                        'error' => 'add failed'
                     )));
                 }
             };
             die(json_encode(array(
                 'return' => true,
-                'message' => 'success',
-                'datapost' => $obj
+                'message' => 'success for '.$a.' add'
             )));
         } else {
             die(json_encode(array(
                 'return' => false,
-                'error' => 'error'
+                'error' => 'Post invalid'
             )));
         };
     }
