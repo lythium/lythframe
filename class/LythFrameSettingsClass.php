@@ -4,15 +4,15 @@
  */
 class LythFrameSettings
 {
-    private $id_unit;
-    private $name_unit;
-    private $image_url;
-    private $spell_name_en;
-    private $spell_name_fr;
-    private $hits;
-    private $spell_frame;
-    private $frame_delay_hit;
-    private $frame_pattern;
+    public $id;
+    public $unit_name;
+    public $image_url;
+    public $spell_name_en;
+    public $spell_name_fr;
+    public $hits;
+    public $spell_frame;
+    public $frame_delay_hit;
+    public $frame_pattern;
 
 
     public function __construct($id_unit = null)
@@ -28,8 +28,8 @@ class LythFrameSettings
         //     'frame_delay_hit' => '',
         //     'frame_pattern' => ''
         // );
-        $this->id_unit = '';
-        $this->name_unit = '';
+        $this->id = '';
+        $this->unit_name = '';
         $this->image_url = '';
         $this->spell_name_en = '';
         $this->spell_name_fr = '';
@@ -52,17 +52,25 @@ class LythFrameSettings
     public static function ajaxProcess() {
         if (isset($_POST) || !empty($_POST)) {
             $nbIndex = count($_POST['save_unit_name']);
-            for ($i = 0; $i <= $nbIndex; $i++) {
-                $obj = New LythFrameSettings();
-                $obj->name_unit = $_POST['save_unit_name'];
-                $obj->image_url = $_POST['save_image_url'];
-                $obj->spell_name_en = $_POST['save_spell_name_en'];
-                $obj->spell_name_fr = $_POST['save_spell_name_fr'];
-                $obj->hits = $_POST['save_hits'];
-                $obj->spell_frame = $_POST['save_spell_frame'];
-                $obj->frame_delay_hit = $_POST['save_frame_delay_hit'];
-                $obj->frame_pattern = $_POST['save_frame_pattern'];
-                $obj->add();
+
+            for ($i=0; $i < $nbIndex; $i++) {
+                $obj = new LythFrameSettings();
+                $obj->id = null;
+                $obj->unit_name = $_POST['save_unit_name'][$i];
+                $obj->image_url = $_POST['save_image_url'][$i];
+                $obj->spell_name_en = $_POST['save_spell_name_en'][$i];
+                $obj->spell_name_fr = $_POST['save_spell_name_fr'][$i];
+                $obj->hits = $_POST['save_hits'][$i];
+                $obj->spell_frame = $_POST['save_spell_frame'][$i];
+                $obj->frame_delay_hit = $_POST['save_frame_delay_hit'][$i];
+                $obj->frame_pattern = $_POST['save_frame_pattern'][$i];
+
+                if (!$obj->add()) {
+                    die(json_encode(array(
+                        'return' => false,
+                        'error' => 'error to add'
+                    )));
+                }
             };
             die(json_encode(array(
                 'return' => true,
@@ -85,19 +93,22 @@ class LythFrameSettings
     public function add()
     {
         global $wpdb;
-        $wpdb->insert(
-            "{$wpdb->prefix}lythframe",
-            array(
-                'name_unit' => $this->name_unit,
-                'image_url' => $this->image_url,
-                'spell_name_en' => $this->spell_name_en,
-                'spell_name_fr' => $this->spell_name_en,
-                'hits' => $this->hits,
-                'spell_frame' => $this->spell_frame,
-                'frame_delay_hit' => $this->frame_delay_hit,
-                'frame_pattern' => $this->frame_pattern
-            )
+        $args = array(
+            'unit_name' => $this->unit_name,
+            'image_url' => $this->image_url,
+            'spell_name_en' => $this->spell_name_en,
+            'spell_name_fr' => $this->spell_name_fr,
+            'hits' => $this->hits,
+            'spell_frame' => $this->spell_frame,
+            'frame_delay_hit' => $this->frame_delay_hit,
+            'frame_pattern' => $this->frame_pattern
         );
+        $wpdb->insert("{$wpdb->prefix}lythframe", $args);
+        die(json_encode(array(
+            'return' => true,
+            'message' => 'after insert',
+            'datapost' => $args
+        )));
     }
 
     public function update()

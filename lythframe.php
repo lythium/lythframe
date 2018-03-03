@@ -42,7 +42,7 @@ class LythFrame
         new LythFrameValidate();
 
         include_once plugin_dir_path(__FILE__).'controller/LythFrameCore.php';
-        New LythFrameCore();
+        new LythFrameCore();
         //Create on install
         register_activation_hook(__FILE__, array(__CLASS__, 'lythframe_install' ));
 
@@ -59,12 +59,12 @@ class LythFrame
         $sql_lythFrame = "CREATE TABLE {$wpdb->prefix}lythframe (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             unit_name varchar(255) NOT NULL,
-            img_dir varchar(255) NOT NULL,
+            image_url varchar(255) NOT NULL,
             url_post varchar(255) DEFAULT '0' NOT NULL,
             spell_name_en varchar(255) NOT NULL,
             spell_name_fr varchar(255) DEFAULT '0' NOT NULL,
+            hits int(5) NOT NULL,
             spell_frame int(5) NOT NULL,
-            frame_delay int(5) NOT NULL,
             frame_delay_hit varchar(255) NOT NULL,
             frame_pattern varchar(255) NOT NULL,
             UNIQUE KEY  (id)
