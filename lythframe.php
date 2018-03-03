@@ -32,6 +32,8 @@ class LythFrame
 
         add_action('admin_enqueue_scripts', array($this, 'framedelay_scripts_admin' ));
 
+        add_shortcode('lythframe', array($this, 'lythframe_shortcode'));
+
         include_once plugin_dir_path(__FILE__).'class/LythFrameSettingsClass.php';
         new LythFrameSettings();
 
@@ -144,6 +146,17 @@ class LythFrame
                  )
          );
          $wp_admin_bar->add_node($args);
+    }
+
+
+
+    static function lythframe_shortcode()
+    {
+        include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+        $multiList = LythFrameCore::getListFront();
+        ob_start();
+        include_once plugin_dir_path(__FILE__).'views/front/framelist.php';
+		return ob_get_clean();
     }
 
     static function framedelay_scripts_admin()

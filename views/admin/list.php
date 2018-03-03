@@ -6,6 +6,9 @@
          <h1 class="wp-heading-inline"><?= get_admin_page_title() ?></h1>
          <a class="page-title-action" href="<?= admin_url('admin.php?page=lythframeadd') ?>" class="page-title-action">Ajouter</a>
          <p>Units Spell Frame Delay</p>
+         <span>Shortcode : <strong>[lythframe]</strong></span>
+         <br>
+         <br>
          <table id="lythframe-list" class="wp-list-table widefat fixed striped pages">
              <thead>
                  <tr>
