@@ -95,19 +95,18 @@
         <table class="wp-list-table widefat fixed striped pages">
             <thead>
                 <tr>
-                    <th scope="col" id="fields" class="manage-column column-title column-primary column-fields">Unit Name</th>
-                    <th scope="col" id="fields" class="manage-column column-fields">image</th>
-                    <th scope="col" id="fields" class="manage-column column-fields">Spell Name</th>
-                    <th scope="col" id="fields" class="manage-column column-fields">Hits</th>
-                    <th scope="col" id="fields" class="manage-column column-fields">Spell Frame</th>
-                    <th scope="col" id="fields" class="manage-column column-fields">Frame Delay Hit</th>
-                    <th scope="col" id="fields" class="manage-column column-fields">Frame Pattern</th>
+                    <th scope="col" id="field_1" class="manage-column column-title column-primary column-fields">Unit Name</th>
+                    <th scope="col" id="field_2" class="manage-column column-fields">image</th>
+                    <th scope="col" id="field_3" class="manage-column column-fields">Spell Name</th>
+                    <th scope="col" id="field_4" class="manage-column column-fields">Hits</th>
+                    <th scope="col" id="field_5" class="manage-column column-fields">Spell Frame</th>
+                    <th scope="col" id="field_6" class="manage-column column-fields">Frame Delay Hit</th>
+                    <th scope="col" id="field_7" class="manage-column column-fields">Frame Pattern</th>
+                    <th></th>
                 </tr>
             </thead>
-            <tbody id"the-list">
-                <form class="" action="index.html" method="post">
-
-                </form>
+            <tbody id="add_list">
+                    <!-- item -->
             </tbody>
             <tfoot>
                 <tr class="no-items">
@@ -115,5 +114,11 @@
                 </tr>
             </tfoot>
         </table>
+        <form id="formlist">
+            <div>
+                <!-- Item -->
+            </div>
+            <button id="save_btn" type="submit" class="btn btn-info" value="Save"><span class="icon_text">Add</span></button>
+        </form>
     </div>
 </div>

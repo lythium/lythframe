@@ -64,7 +64,8 @@ class LythFrameValidate
         }
         die(json_encode(array(
             'return' => true,
-            'message' => 'success'
+            'message' => 'success',
+            'datapost' => $_POST
         )));
     }
     public static function isNumeric($value)
