@@ -35,6 +35,7 @@ jQuery(document).ready( function($){
                         $('#addtolist')[0].reset();
                         $('#upload_image').attr('src', '');
                         $('.image_group').css('display', 'none');
+                        $('#image_url_group').css('display', 'block');
                     } else {
                         console.log(data.error);
                         $error.html(data.error);
