@@ -32,6 +32,9 @@ jQuery(document).ready( function($){
                         $success.html(data.message);
                         $success.parent().css('display', 'block');
                         addtolist(data.datapost);
+                        $('#addtolist')[0].reset();
+                        $('#upload_image').attr('src', '');
+                        $('.image_group').css('display', 'none');
                     } else {
                         console.log(data.error);
                         $error.html(data.error);
