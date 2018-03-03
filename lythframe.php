@@ -35,7 +35,7 @@ class LythFrame
         include_once plugin_dir_path(__FILE__).'class/LythFrameSettingsClass.php';
         new LythFrameSettings();
 
-        include_once plugin_dir_path(__FILE__).'class/LythFrameValidateClass.php';
+        include_once plugin_dir_path(__FILE__).'controller/LythFrameValidate.php';
         new LythFrameValidate();
 
         //Create on install
