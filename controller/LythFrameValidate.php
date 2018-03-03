@@ -20,7 +20,7 @@ class LythFrameValidate
         if (!isset($_POST['image_url']) || empty($_POST['image_url']) || !LythFrameTools::isUrl($_POST['image_url'])) {
             die(json_encode(array(
                 'return' => false,
-                'error' => 'mail invalid'
+                'error' => 'image invalid'
             )));
         }
         if (!isset($_POST['spell_name_en']) || empty($_POST['spell_name_en']) || !LythFrameTools::isGenericName($_POST['spell_name_en'])) {
