@@ -21,7 +21,7 @@ class LythFrameCore
     public static function getList()
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lythframe DESC spell_frame");
+        $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lythframe ORDER BY spell_frame ASC, hits ASC, frame_pattern + 1 ASC",OBJECT);
         if (!$results) {
             $results = false;
         }
