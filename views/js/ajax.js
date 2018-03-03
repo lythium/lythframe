@@ -1,12 +1,13 @@
 jQuery(document).ready( function($){
-    var $addform = $('#addtolist'),
+    var $addToForm = $('#addtolist'),
         $success = $('#lythframe_success p'),
         $error = $('#lythframe_error p'),
-        $closeMessage = $('.alert .icon-cancel-circled');
+        $closeMessage = $('.alert .icon-cancel-circled'),
+        $formlist = $('#formlist');
 
     var $count = 0;
 
-    $addform.submit(function(e) {
+    $addToForm.submit(function(e) {
         $('#add_btn').prop('disabled', true);
         $('#add_btn i').css('display', 'block');
         $('#add_btn .icon_text').css('display', 'none');
@@ -49,8 +50,48 @@ jQuery(document).ready( function($){
             });
         }, 2000);
     });
+
+    $formlist.submit(function(e) {
+        // $('#add_btn').prop('disabled', true);
+        // $('#add_btn i').css('display', 'block');
+        // $('#add_btn .icon_text').css('display', 'none');
+        e.preventDefault();
+        $success.parent().css('display', 'none');
+        $error.parent().css('display', 'none');
+        var $actionUrl = $(this).attr('action');
+        console.log($actionUrl);
+        var $data = $(this).serializeArray();
+        $data.push(
+            {name: 'action', value: 'ajaxProcess'}
+        );
+        setTimeout(function(){
+            $.ajax({
+                url: ajax_object.ajaxurl,
+                type: 'POST',
+                dataType: 'JSON',
+                data: $data,
+                success: function(data){
+                    if (data.return) {
+                        console.log(data.message);
+                        $success.html(data.message);
+                        $success.parent().css('display', 'block');
+                    } else {
+                        console.log(data.error);
+                        $error.html(data.error);
+                        $error.parent().css('display', 'block');
+                    }
+                },
+                error: function(XHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        }, 2000);
+    });
+
+
+
     function addtolist(data) {
-        var $formlist = $('#formlist div');
+        var $formListContent = $('#formlist div');
         var $list = $('#add_list');
         // add in form
         $('<div id="formlist_item_'+$count+'">'+
@@ -62,7 +103,7 @@ jQuery(document).ready( function($){
             '<input type="hidden" name="save_spell_frame" value="'+data.spell_frame+'">'+
             '<input type="hidden" name="save_frame_delay_hit" value="'+data.frame_delay_hit+'">'+
             '<input type="hidden" name="save_frame_pattern" value="'+data.frame_pattern+'">'+
-        '</div>').appendTo($formlist);
+        '</div>').appendTo($formListContent);
 
         // add in list display
         $('<tr id="add_list_item_'+$count+'">'+

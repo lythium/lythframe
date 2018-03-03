@@ -1,6 +1,4 @@
-<?php
 
-?>
 <div id="acf-field-group-wrap" class="wrap lythframeadd">
     <div class="acf-columns-2">
         <h1 class="wp-heading-inline"><?= get_admin_page_title() ?></h1>
@@ -114,11 +112,18 @@
                 </tr>
             </tfoot>
         </table>
-        <form id="formlist">
+        <form id="formlist" method="post" action="<?= admin_url('admin.php?page=lythframeadd') ?>">
             <div>
                 <!-- Item -->
             </div>
-            <button id="save_btn" type="submit" class="btn btn-info" value="Save"><span class="icon_text">Add</span></button>
+            <button id="save_btn" type="submit" class="btn btn-info" value="Save"><i class="icon-spin5 animate-spin"></i><span class="icon_text">Add</span></button>
         </form>
     </div>
 </div>
+
+<?php
+    $obj = new LythFrameSettings();
+    echo "<pre>";
+    var_dump($obj);
+    echo "</pre>";
+?>

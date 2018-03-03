@@ -80,10 +80,10 @@ div.alert-error {
 #add_btn {
 
 }
-#add_btn i.icon-spin5 {
+#add_btn i.icon-spin5, #save_btn i.icon-spin5 {
     display: none;
     color: #000000;
 }
-#add_btn span.icon_text {
+#add_btn span.icon_text, #save_btn span.icon_text {
 
 }

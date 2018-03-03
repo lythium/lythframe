@@ -35,9 +35,14 @@ class LythFrame
         include_once plugin_dir_path(__FILE__).'class/LythFrameSettingsClass.php';
         new LythFrameSettings();
 
+        include_once plugin_dir_path(__FILE__).'controller/LythFrameTools.php';
+        new LythFrameTools();
+
         include_once plugin_dir_path(__FILE__).'controller/LythFrameValidate.php';
         new LythFrameValidate();
 
+        include_once plugin_dir_path(__FILE__).'controller/LythFrameCore.php';
+        New LythFrameCore();
         //Create on install
         register_activation_hook(__FILE__, array(__CLASS__, 'lythframe_install' ));
 

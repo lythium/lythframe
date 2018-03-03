@@ -6,9 +6,6 @@ class LythFrameValidate
 {
     function __construct()
     {
-        include_once plugin_dir_path(__FILE__).'LythFrameTools.php';
-        new LythFrameTools();
-
         add_action( 'wp_ajax_validateProcess', array($this, 'validateProcess' ));
         add_action( 'wp_ajax_nopriv_validateProcess', array($this, 'validateProcess' ));
     }
