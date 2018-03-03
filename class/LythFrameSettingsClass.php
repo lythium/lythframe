@@ -51,24 +51,23 @@ class LythFrameSettings
 
     public static function ajaxProcess() {
         if (isset($_POST) || !empty($_POST)) {
-            $nbIndex = count($_POST['save_unit_name']);
-
-            for ($i=0; $i < $nbIndex; $i++) {
+            $nbIndex = (int)count($_POST['save_unit_name']);
+            for ($a=0; $a < $nbIndex; $a++)  {
                 $obj = new LythFrameSettings();
                 $obj->id = null;
-                $obj->unit_name = $_POST['save_unit_name'][$i];
-                $obj->image_url = $_POST['save_image_url'][$i];
-                $obj->spell_name_en = $_POST['save_spell_name_en'][$i];
-                $obj->spell_name_fr = $_POST['save_spell_name_fr'][$i];
-                $obj->hits = $_POST['save_hits'][$i];
-                $obj->spell_frame = $_POST['save_spell_frame'][$i];
-                $obj->frame_delay_hit = $_POST['save_frame_delay_hit'][$i];
-                $obj->frame_pattern = $_POST['save_frame_pattern'][$i];
+                $obj->unit_name = $_POST['save_unit_name'][$a];
+                $obj->image_url = $_POST['save_image_url'][$a];
+                $obj->spell_name_en = $_POST['save_spell_name_en'][$a];
+                $obj->spell_name_fr = $_POST['save_spell_name_fr'][$a];
+                $obj->hits = $_POST['save_hits'][$a];
+                $obj->spell_frame = $_POST['save_spell_frame'][$a];
+                $obj->frame_delay_hit = $_POST['save_frame_delay_hit'][$a];
+                $obj->frame_pattern = $_POST['save_frame_pattern'][$a];
 
                 if (!$obj->add()) {
                     die(json_encode(array(
                         'return' => false,
-                        'error' => 'error to add'
+                        'error' => $a
                     )));
                 }
             };
@@ -103,12 +102,10 @@ class LythFrameSettings
             'frame_delay_hit' => $this->frame_delay_hit,
             'frame_pattern' => $this->frame_pattern
         );
-        $wpdb->insert("{$wpdb->prefix}lythframe", $args);
-        die(json_encode(array(
-            'return' => true,
-            'message' => 'after insert',
-            'datapost' => $args
-        )));
+        if (!$wpdb->insert("{$wpdb->prefix}lythframe", $args)) {
+            return false;
+        }
+        return true;
     }
 
     public function update()
