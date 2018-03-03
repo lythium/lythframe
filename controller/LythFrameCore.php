@@ -27,6 +27,15 @@ class LythFrameCore
         }
         return $results;
     }
+    public static function getListFront()
+    {
+        global $wpdb;
+        $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lythframe ORDER BY spell_frame ASC, hits ASC, frame_pattern + 1 ASC",OBJECT);
+        if (!$results) {
+            $results = false;
+        }
+        return $results;
+    }
     public function load_wp_media_files() {
         wp_enqueue_media();
     }
