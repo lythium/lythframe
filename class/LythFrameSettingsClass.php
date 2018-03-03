@@ -91,6 +91,13 @@ class LythFrameSettings
     public function add()
     {
         global $wpdb;
+        $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lythframe WHERE unit_name = '$this->unit_name' AND spell_name_en = '$this->spell_name_en'");
+        if (!empty($results)) {
+            die(json_encode(array(
+                'return' => false,
+                'error' => 'Unit already exists'
+            )));
+        };
         $args = array(
             'unit_name' => $this->unit_name,
             'image_url' => $this->image_url,
