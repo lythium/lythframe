@@ -75,6 +75,7 @@ jQuery(document).ready( function($){
                         console.log(data.message);
                         $success.html(data.message);
                         $success.parent().css('display', 'block');
+                        console.log(data.datapost);
                     } else {
                         console.log(data.error);
                         $error.html(data.error);
@@ -95,14 +96,14 @@ jQuery(document).ready( function($){
         var $list = $('#add_list');
         // add in form
         $('<div id="formlist_item_'+$count+'">'+
-            '<input type="hidden" name="save_unit_name" value="'+data.unit_name+'">'+
-            '<input type="hidden" name="save_image_url" value="'+data.image_url+'">'+
-            '<input type="hidden" name="save_spell_name_en" value="'+data.spell_name_en+'">'+
-            '<input type="hidden" name="save_spell_name_fr" value="'+data.spell_name_fr+'">'+
-            '<input type="hidden" name="save_hits" value="'+data.hits+'">'+
-            '<input type="hidden" name="save_spell_frame" value="'+data.spell_frame+'">'+
-            '<input type="hidden" name="save_frame_delay_hit" value="'+data.frame_delay_hit+'">'+
-            '<input type="hidden" name="save_frame_pattern" value="'+data.frame_pattern+'">'+
+            '<input type="hidden" name="save_unit_name['+$count+'][]" value="'+data.unit_name+'">'+
+            '<input type="hidden" name="save_image_url['+$count+'][]" value="'+data.image_url+'">'+
+            '<input type="hidden" name="save_spell_name_en['+$count+'][]" value="'+data.spell_name_en+'">'+
+            '<input type="hidden" name="save_spell_name_fr['+$count+'][]" value="'+data.spell_name_fr+'">'+
+            '<input type="hidden" name="save_hits['+$count+'][]" value="'+data.hits+'">'+
+            '<input type="hidden" name="save_spell_frame['+$count+'][]" value="'+data.spell_frame+'">'+
+            '<input type="hidden" name="save_frame_delay_hit['+$count+'][]" value="'+data.frame_delay_hit+'">'+
+            '<input type="hidden" name="save_frame_pattern['+$count+'][]" value="'+data.frame_pattern+'">'+
         '</div>').appendTo($formListContent);
 
         // add in list display

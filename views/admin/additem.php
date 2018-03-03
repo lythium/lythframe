@@ -121,6 +121,7 @@
     </div>
 </div>
 
+<pre id="prelog"></pre>
 <?php
     $obj = new LythFrameSettings();
     echo "<pre>";
