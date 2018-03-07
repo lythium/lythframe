@@ -1,15 +1,11 @@
 <?php
-    if (isset($_GET)) {
-        var_dump($_GET);
+    if (isset($_GET["button"])) {
+        if ($_GET["button"] === "delete") {
+            $obj_delete = new LythFrameSettings($_GET['id_item']);
+            $obj_delete->delete();
+        }
     }
  ?>
- <pre>
-     <?php $obj1 = new LythFrameSettings() ?>
-     <?php var_dump($obj1); ?>
- <br>
-     <?php $obj2 = new LythFrameSettings(23) ?>
-     <?php var_dump($obj2); ?>
-</pre>
 
  <div id="acf-field-group-wrap" class="wrap lythframelist">
      <div class="acf-columns-2">
@@ -41,7 +37,7 @@
                         <th scope="col" id="field_5" class="manage-column column-fields">Spell Frame</th>
                         <th scope="col" id="field_6" class="manage-column column-fields">Frame Delay Hit</th>
                         <th scope="col" id="field_7" class="manage-column column-fields">Frame Pattern</th>
-                        <th scope="col" id="field_8" class="manage-column column-fields"> </th>
+                        <th scope="col" id="field_8" class="manage-column column-fields"><a href="<?= admin_url('admin.php?page=lythframelist') ?>"><i class="icon-cancel-circled"></i></a> </th>
                     </tr>
                 </thead>
                 <tbody>
