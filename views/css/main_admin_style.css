@@ -51,6 +51,16 @@ div.alert-error {
 #field_3, #field_5,#field_7, #field_6 {
     width: 15%;
 }
+#field_8 {
+    text-align: center;
+}
+#edit-list-item #field_8 {
+    text-align: right;
+}
+#edit-list-item #field_8 a i {
+    font-size: 24px;
+    color: red;
+}
 #form_addtolist th input,
 #form_addtolist th button,
 #edit-list-item th input,
