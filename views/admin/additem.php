@@ -84,13 +84,7 @@
             </tfoot>
         </table>
 
-        <div class="separator" style="display:block;margin-top:40px;">
-            <?php
-            // $pattern = "5-54-58-87-95-155";
-            // $result = LythFrameValidate::isPattern($pattern, 7);
-            // var_dump($result);
-            ?>
-        </div>
+        <div class="separator" style="display:block;margin-top:40px;"></div>
 
         <table class="wp-list-table widefat fixed striped pages">
             <thead>
@@ -122,11 +116,3 @@
         </form>
     </div>
 </div>
-
-<pre id="prelog"></pre>
-<?php
-    $obj = new LythFrameSettings();
-    echo "<pre>";
-    var_dump($obj);
-    echo "</pre>";
-?>
