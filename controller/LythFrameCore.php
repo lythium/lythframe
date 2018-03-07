@@ -10,6 +10,9 @@ class LythFrameCore
 
         add_action( 'wp_ajax_addProcess', array($this, 'addProcess' ));
         add_action( 'wp_ajax_nopriv_addProcess', array($this, 'addProcess' ));
+
+        add_action( 'wp_ajax_updateProcess', array($this, 'updateProcess' ));
+        add_action( 'wp_ajax_nopriv_updateProcess', array($this, 'updateProcess' ));
     }
 
     public static function addProcess() {
@@ -54,11 +57,37 @@ class LythFrameCore
 
     public static function updateProcess() {
         if (isset($_POST) || !empty($_POST)) {
+            if ($_POST['submit-type'] == "update") {
+                $dif = 0;
+                $obj = new LythFrameSettings($_POST["id"]);
 
+                foreach ($obj as $key => $value) {
+                    if ($value !== $_POST[$key]) {
+                        $obj->$key = $value;
+                        $dif++;
+                    };
+                };
+                if ($dif > 0) {
+                    if (!$obj->update()) {
+                        die(json_encode(array(
+                            'return' => false,
+                            'error' => 'update failed'
+                        )));
+                    };
+                    die(json_encode(array(
+                        'return' => true,
+                        'message' => 'success update'
+                    )));
+                };
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'no dif'
+                )));
+            }
         } else {
             die(json_encode(array(
                 'return' => false,
-                'error' => 'Data invalid'
+                'error' => 'Data for update invalid'
             )));
         };
     }
