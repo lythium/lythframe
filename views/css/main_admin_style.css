@@ -51,15 +51,23 @@ div.alert-error {
 #field_3, #field_5,#field_7, #field_6 {
     width: 15%;
 }
-#form_addtolist th input, #form_addtolist th button, #lythframe-list th button {
+#form_addtolist th input,
+#form_addtolist th button,
+#edit-list-item th input,
+#edit-list-item th button,
+#lythframe-list th button {
     width: 100%!important;
 }
-#form_addtolist th input {
+#form_addtolist th input,
+#edit-list-item th input {
     padding-left: 5px;
 }
 #image_url_group {
     text-align: center;
     justify-content: center;
+}
+#edit-list-item #image_url_group {
+    display: none;
 }
 #upload_image {
     max-width: 100%!important;
@@ -73,6 +81,9 @@ div.alert-error {
     align-items: center;
     justify-content: center;
 }
+#edit-list-item .image_group {
+    display: block;
+}
 #close_upload {
     font-weight: 900;
     color: red;
@@ -83,7 +94,9 @@ div.alert-error {
 #add_btn {
 
 }
-#add_btn i.icon-spin5, #save_btn i.icon-spin5 {
+#add_btn i.icon-spin5,
+#save_btn i.icon-spin5,
+#update_btn i.icon-spin5 {
     display: none;
     color: #000000;
 }

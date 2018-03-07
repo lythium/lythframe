@@ -23,7 +23,7 @@ class LythFrame
         $this->plugin               = new stdClass;
         $this->plugin->name         = 'lythframe'; // Plugin Folder
         $this->plugin->displayName  = 'LythFrame'; // Plugin Name
-        $this->plugin->version      = '1.0.0';
+        $this->plugin->version      = '1.1.0';
         $this->plugin->folder       = plugin_dir_path(__FILE__);
         $this->plugin->url          = plugin_dir_url(__FILE__);
 
@@ -31,6 +31,7 @@ class LythFrame
         add_action('admin_bar_menu', array($this, 'custom_toolbar_link'), 999);
 
         add_action('admin_enqueue_scripts', array($this, 'framedelay_scripts_admin' ));
+        add_action('wp_enqueue_scripts', array($this, 'framedelay_scripts' ));
 
         add_shortcode('lythframe', array($this, 'lythframe_shortcode'));
 
@@ -158,7 +159,13 @@ class LythFrame
         include_once plugin_dir_path(__FILE__).'views/front/framelist.php';
 		return ob_get_clean();
     }
-
+    static function framedelay_scripts()
+    {
+        wp_register_style( 'lythframecss', get_site_url() . '/wp-content/plugins/lythframe/views/css/main_style.css' );
+        wp_enqueue_style( 'lythframecss' );
+        wp_enqueue_script( 'lythframejs', get_site_url() . '/wp-content/plugins/lythframe/views/js/main.js', array(), false, true );
+        wp_enqueue_script( 'lythframejs' );
+    }
     static function framedelay_scripts_admin()
     {
         // Ajax

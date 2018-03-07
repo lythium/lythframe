@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+#lythframe .table {
+    width: 100%!important;
+    text-align: center!important;
+    border-top: 6px inset #555!important;
+    border-right: 6px inset #555!important;
+    border-bottom: 6px outset #555!important;
+    border-left: 6px outset #555!important;
+    display: flex;
+    flex-direction: column;
+}
+#lythframe .table .row_title .table_cel {
+    text-align: center;
+    padding: 0;
+}
+#lythframe .table_row {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+#lythframe .table_cel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #555!important;
+}
+#lythframe .table_cel.image_unit {
+    width: 10%!important;
+}
+#lythframe .table_cel.name {
+    width: 15%!important;
+}
+#lythframe .table_cel.spell_name {
+    width: 20%!important;
+}
+#lythframe .table_cel.hits {
+    width: 10%!important;
+}
+#lythframe .table_cel.delay {
+    width: 20%!important;
+}
+#lythframe .table_cel.patern {
+    width: 25%!important;
+}
+#lythframe .row_title td {
+    background-color: rgba(38, 49, 78, 0.69);
+}
+#lythframe tr td:first-child {
+    background-color: rgba(50, 50, 50, 0.5);
+}
+#lythframe tr.separator_row {
+    background-color: rgba(42, 161, 173, 0.4);
+}
+#lythframe #frame_fix_header {
+    display: flex!important;
+    height: 100%!important;
+    width: 100%!important;
+    flex-direction: row!important;
+    justify-content: center!important;
+    align-items: center!important;
+    background-color: rgba(51, 218, 234, 0.4)!important;
+    color: #000000!important;
+    font-weight: 700!important;
+    border: 4px inset #555!important;
+}
+#lythframe #frame_fix_header:visited {
+    text-decoration: none!important;
+}

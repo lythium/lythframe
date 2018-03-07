@@ -1,5 +1,6 @@
 jQuery(document).ready( function($){
     var $addToForm = $('#addtolist'),
+        $updateForm = $('#update'),
         $success = $('#lythframe_success p'),
         $error = $('#lythframe_error p'),
         $closeMessage = $('.alert .icon-cancel-circled'),
@@ -66,7 +67,7 @@ jQuery(document).ready( function($){
         console.log($actionUrl);
         var $data = $(this).serializeArray();
         $data.push(
-            {name: 'action', value: 'ajaxProcess'}
+            {name: 'action', value: 'addProcess'}
         );
         setTimeout(function(){
             $.ajax({
@@ -79,6 +80,8 @@ jQuery(document).ready( function($){
                         console.log(data.message);
                         $success.html(data.message);
                         $success.parent().css('display', 'block');
+                        $('#formlist div div[id^=formlist_item]').remove();
+                        $('#add_list tr[id^=add_list_item_]').remove();
                         console.log(data.datapost);
                     } else {
                         console.log(data.error);
@@ -93,6 +96,44 @@ jQuery(document).ready( function($){
         }, 2000);
     });
 
+    $updateForm.submit(function(e) {
+        e.preventDefault();
+        $('#update_btn').prop('disabled', true);
+        $('#update_btn i').css('display', 'block');
+        $('#update_btn .icon_text').css('display', 'none');
+        $success.parent().css('display', 'none');
+        $error.parent().css('display', 'none');
+        var $data = $(this).serializeArray();
+        $data.push(
+            {name: 'action', value: 'validateProcess'}
+        );
+
+        setTimeout(function(){
+            $.ajax({
+                url: ajax_object.ajaxurl,
+                type: 'POST',
+                dataType: 'JSON',
+                data: $data,
+                success: function(data){
+                    if (data.return) {
+                        console.log(data.message);
+                        $success.html(data.message);
+                        $success.parent().css('display', 'block');
+                    } else {
+                        console.log(data.error);
+                        $error.html(data.error);
+                        $error.parent().css('display', 'block');
+                    }
+                },
+                error: function(XHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                    $('#update_btn i').css('display', 'none');
+                    $('#update_btn .icon_text').css('display', 'block');
+                    $('#update_btn').prop('disabled', false);
+                }
+            });
+        }, 1000);
+    });
 
 
     function addtolist(data) {
