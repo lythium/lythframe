@@ -48,6 +48,7 @@ class LythFrameSettings
             'image_url' => $this->image_url,
             'spell_name_en' => $this->spell_name_en,
             'spell_name_fr' => $this->spell_name_fr,
+            'url_post' => $this->url_post,
             'hits' => $this->hits,
             'spell_frame' => $this->spell_frame,
             'frame_delay_hit' => $this->frame_delay_hit,
@@ -61,7 +62,22 @@ class LythFrameSettings
 
     public function update()
     {
-
+        $id = $this->id;
+        $args = array(
+            'unit_name' => $this->unit_name,
+            'image_url' => $this->image_url,
+            'spell_name_en' => $this->spell_name_en,
+            'spell_name_fr' => $this->spell_name_fr,
+            'url_post' => $this->url_post,
+            'hits' => $this->hits,
+            'spell_frame' => $this->spell_frame,
+            'frame_delay_hit' => $this->frame_delay_hit,
+            'frame_pattern' => $this->frame_pattern
+        );
+        if (!$wpdb->update("{$wpdb->prefix}lythframe", $args, array('id' => $id), array( '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s', '%s'), array('%d'))) {
+            return false;
+        }
+        return true;
     }
 
     public function delete()
