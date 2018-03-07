@@ -23,7 +23,7 @@ class LythFrame
         $this->plugin               = new stdClass;
         $this->plugin->name         = 'lythframe'; // Plugin Folder
         $this->plugin->displayName  = 'LythFrame'; // Plugin Name
-        $this->plugin->version      = '1.1.0';
+        $this->plugin->version      = '1.1.1';
         $this->plugin->folder       = plugin_dir_path(__FILE__);
         $this->plugin->url          = plugin_dir_url(__FILE__);
 
@@ -63,9 +63,9 @@ class LythFrame
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             unit_name varchar(255) NOT NULL,
             image_url varchar(255) NOT NULL,
-            url_post varchar(255) DEFAULT '0' NOT NULL,
+            url_post varchar(255) DEFAULT '' NOT NULL,
             spell_name_en varchar(255) NOT NULL,
-            spell_name_fr varchar(255) DEFAULT '0' NOT NULL,
+            spell_name_fr varchar(255) DEFAULT '' NOT NULL,
             hits int(5) NOT NULL,
             spell_frame int(5) NOT NULL,
             frame_delay_hit varchar(255) NOT NULL,

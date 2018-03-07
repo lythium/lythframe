@@ -17,6 +17,14 @@ class LythFrameValidate
                 'error' => 'Name invalid'
             )));
         }
+        if (!empty($_POST['url_post'])) {
+            if (!LythFrameTools::isUrl($_POST['url_post'])) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'Url Post invalid'
+                )));
+            }
+        }
         if (!isset($_POST['image_url']) || empty($_POST['image_url']) || !LythFrameTools::isUrl($_POST['image_url'])) {
             die(json_encode(array(
                 'return' => false,
