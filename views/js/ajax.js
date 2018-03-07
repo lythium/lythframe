@@ -9,9 +9,7 @@ jQuery(document).ready( function($){
     var $count = 0;
 
     $addToForm.submit(function(e) {
-        $('#add_btn').prop('disabled', true);
-        $('#add_btn i').css('display', 'block');
-        $('#add_btn .icon_text').css('display', 'none');
+        btnAddLoade(false);
         e.preventDefault();
         $success.parent().css('display', 'none');
         $error.parent().css('display', 'none');
@@ -42,15 +40,11 @@ jQuery(document).ready( function($){
                         $error.html(data.error);
                         $error.parent().css('display', 'block');
                     }
-                    $('#add_btn i').css('display', 'none');
-                    $('#add_btn .icon_text').css('display', 'block');
-                    $('#add_btn').prop('disabled', false);
+                    btnAddLoade(true);
                 },
                 error: function(XHR, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
-                    $('#add_btn i').css('display', 'none');
-                    $('#add_btn .icon_text').css('display', 'block');
-                    $('#add_btn').prop('disabled', false);
+                    btnAddLoade(true);
                 }
             });
         }, 2000);
@@ -98,9 +92,7 @@ jQuery(document).ready( function($){
 
     $updateForm.submit(function(e) {
         e.preventDefault();
-        $('#update_btn').prop('disabled', true);
-        $('#update_btn i').css('display', 'block');
-        $('#update_btn .icon_text').css('display', 'none');
+        btnUpdateLoade(false);
         $success.parent().css('display', 'none');
         $error.parent().css('display', 'none');
         var $data = $(this).serializeArray();
@@ -130,36 +122,29 @@ jQuery(document).ready( function($){
                                     console.log('data updated !');
                                     $success.html(data.message);
                                     $success.parent().css('display', 'block');
+                                    btnUpdateLoade(true);
                                 } else {
                                     console.log(data.error);
                                     $error.html(data.error);
                                     $error.parent().css('display', 'block');
-                                    $('#update_btn i').css('display', 'none');
-                                    $('#update_btn .icon_text').css('display', 'block');
-                                    $('#update_btn').prop('disabled', false);
+                                    btnUpdateLoade(true);
                                 }
                             },
                             error: function(XHR, textStatus, errorThrown) {
                                 console.log(textStatus, errorThrown);
-                                $('#update_btn i').css('display', 'none');
-                                $('#update_btn .icon_text').css('display', 'block');
-                                $('#update_btn').prop('disabled', false);
+                                btnUpdateLoade(true);
                             }
                         });
                     } else {
                         console.log(data.error);
                         $error.html(data.error);
                         $error.parent().css('display', 'block');
-                        $('#update_btn i').css('display', 'none');
-                        $('#update_btn .icon_text').css('display', 'block');
-                        $('#update_btn').prop('disabled', false);
+                        btnUpdateLoade(true);
                     }
                 },
                 error: function(XHR, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
-                    $('#update_btn i').css('display', 'none');
-                    $('#update_btn .icon_text').css('display', 'block');
-                    $('#update_btn').prop('disabled', false);
+                    btnUpdateLoade(true);
                 }
             });
         }, 1000);
@@ -173,6 +158,7 @@ jQuery(document).ready( function($){
         $('<div id="formlist_item_'+$count+'">'+
             '<input type="hidden" name="save_unit_name['+$count+']" value="'+data.unit_name+'">'+
             '<input type="hidden" name="save_image_url['+$count+']" value="'+data.image_url+'">'+
+            '<input type="hidden" name="save_url_post['+$count+']" value="'+data.url_post+'">'+
             '<input type="hidden" name="save_spell_name_en['+$count+']" value="'+data.spell_name_en+'">'+
             '<input type="hidden" name="save_spell_name_fr['+$count+']" value="'+data.spell_name_fr+'">'+
             '<input type="hidden" name="save_hits['+$count+']" value="'+data.hits+'">'+
@@ -185,13 +171,15 @@ jQuery(document).ready( function($){
         $('<tr id="add_list_item_'+$count+'">'+
             '<th>'+
                 '<span class="save_unit_name">'+data.unit_name+'</span>'+
+                '<br>'+
+                '<span class="save_url_post">'+data.url_post+'</span>'+
             '</th>'+
             '<th>'+
                 '<img  src="'+data.image_url+'" alt="" class="save_upload_image">'+
             '</th>'+
             '<th>'+
                 '<span class="save_spell_name_en">'+data.spell_name_en+'</span>'+
-                    '<br>'+
+                '<br>'+
                 '<span class="save_spell_name_fr">'+data.spell_name_fr+'</span>'+
             '</th>'+
             '<th>'+
@@ -242,4 +230,34 @@ jQuery(document).ready( function($){
         $('.image_group').css('display', 'none');
         $('#image_url_group').css('display', 'block');
     });
+
+    function btnAddLoade(mode) {
+        switch (mode) {
+            case true:
+                $('#add_btn i').css('display', 'none');
+                $('#add_btn .icon_text').css('display', 'block');
+                $('#add_btn').prop('disabled', false);
+                break;
+            case false:
+                $('#add_btn').prop('disabled', true);
+                $('#add_btn i').css('display', 'block');
+                $('#add_btn .icon_text').css('display', 'none');
+                break;
+        }
+    }
+
+    function btnUpdateLoade(mode) {
+        switch (mode) {
+            case true:
+                $('#update_btn i').css('display', 'none');
+                $('#update_btn .icon_text').css('display', 'block');
+                $('#update_btn').prop('disabled', false);
+                break;
+            case false:
+                $('#update_btn').prop('disabled', true);
+                $('#update_btn i').css('display', 'block');
+                $('#update_btn .icon_text').css('display', 'none');
+                break;
+        }
+    }
 });
