@@ -31,6 +31,8 @@
                 <form id="addtolist">
                     <th>
                         <input type="text" name="unit_name" value="" placeholder="Unit Name">
+                        <br>
+                        <input type="text" name="url_post" value="" placeholder="Url Post Unit">
                     </th>
 
                     <th>

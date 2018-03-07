@@ -49,6 +49,8 @@
                         <th>
                             <input type="hidden" name="id" value="<?php echo $obj->id ?>">
                             <input type="text" name="unit_name" value="<?php echo $obj->unit_name ?>" placeholder="<?php echo $obj->unit_name ?>">
+                            <br>
+                            <input type="text" name="url_post" value="<?php echo $obj->url_post ?>" placeholder="<?php echo $obj->url_post ?>">
                         </th>
                         <th>
                             <div class="form-group" id="image_url_group" >
@@ -84,6 +86,7 @@
                             <input type="text" name="frame_pattern" value="<?php echo $obj->frame_pattern ?>" placeholder="<?php echo $obj->frame_pattern ?>">
                         </th>
                         <th>
+                            <input type="hidden" name="submit-type" value="update">
                             <button id="update_btn" type="submit" class="btn btn-info" value="update"><i class="icon-spin5 animate-spin"></i><span class="icon_text">Update</span></button>
                         </th>
                     </form>
