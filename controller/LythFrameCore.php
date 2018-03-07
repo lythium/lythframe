@@ -29,6 +29,7 @@ class LythFrameCore
                 $obj->id = null;
                 $obj->unit_name = $_POST['save_unit_name'][$a];
                 $obj->image_url = $_POST['save_image_url'][$a];
+                $obj->url_post = $_POST['save_url_post'][$a];
                 $obj->spell_name_en = $_POST['save_spell_name_en'][$a];
                 $obj->spell_name_fr = $_POST['save_spell_name_fr'][$a];
                 $obj->hits = $_POST['save_hits'][$a];
@@ -63,7 +64,7 @@ class LythFrameCore
 
                 foreach ($obj as $key => $value) {
                     if ($value !== $_POST[$key]) {
-                        $obj->$key = $value;
+                        $obj->$key = $_POST[$key];
                         $dif++;
                     };
                 };
