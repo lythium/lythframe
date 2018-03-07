@@ -116,13 +116,43 @@ jQuery(document).ready( function($){
                 data: $data,
                 success: function(data){
                     if (data.return) {
-                        console.log(data.message);
-                        $success.html(data.message);
-                        $success.parent().css('display', 'block');
+                        console.log('data valide, go to update');
+                        $data.push(
+                            {name: 'action', value: 'updateProcess'}
+                        );
+                        $.ajax({
+                            url: ajax_object.ajaxurl,
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data: $data,
+                            success: function(data){
+                                if (data.return) {
+                                    console.log('data updated !');
+                                    $success.html(data.message);
+                                    $success.parent().css('display', 'block');
+                                } else {
+                                    console.log(data.error);
+                                    $error.html(data.error);
+                                    $error.parent().css('display', 'block');
+                                    $('#update_btn i').css('display', 'none');
+                                    $('#update_btn .icon_text').css('display', 'block');
+                                    $('#update_btn').prop('disabled', false);
+                                }
+                            },
+                            error: function(XHR, textStatus, errorThrown) {
+                                console.log(textStatus, errorThrown);
+                                $('#update_btn i').css('display', 'none');
+                                $('#update_btn .icon_text').css('display', 'block');
+                                $('#update_btn').prop('disabled', false);
+                            }
+                        });
                     } else {
                         console.log(data.error);
                         $error.html(data.error);
                         $error.parent().css('display', 'block');
+                        $('#update_btn i').css('display', 'none');
+                        $('#update_btn .icon_text').css('display', 'block');
+                        $('#update_btn').prop('disabled', false);
                     }
                 },
                 error: function(XHR, textStatus, errorThrown) {
