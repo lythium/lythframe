@@ -62,13 +62,14 @@ class LythFrameSettings
 
     public function update()
     {
+        global $wpdb;
         $id = $this->id;
         $args = array(
             'unit_name' => $this->unit_name,
             'image_url' => $this->image_url,
+            'url_post' => $this->url_post,
             'spell_name_en' => $this->spell_name_en,
             'spell_name_fr' => $this->spell_name_fr,
-            'url_post' => $this->url_post,
             'hits' => $this->hits,
             'spell_frame' => $this->spell_frame,
             'frame_delay_hit' => $this->frame_delay_hit,
