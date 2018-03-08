@@ -15,4 +15,21 @@ $(document).ready(function() {
             resizeHeaderLeft();
         };
     });
+
+    function resizeHeaderLeft() {
+        var topsideHeight = $("#topside").height(),
+            contentHeight = $("#content").height(),
+            heightContent = topsideHeight + contentHeight ;
+
+        var heightLogo = $('.header #logo').height(),
+            heightHeaderLeftContent = $('.header .left-sidebar').height(),
+            heightSocial = $('.header #social').height() ,
+            heightHeader = (heightLogo * 2) + heightHeaderLeftContent + heightSocial;
+
+        if (heightHeader > heightContent) {
+            $("header").css('height', heightHeader);
+        } else if (heightHeader < heightContent) {
+            $("header").css('height', heightContent + heightLogo);
+        }
+    };
 });
