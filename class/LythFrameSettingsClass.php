@@ -36,7 +36,7 @@ class LythFrameSettings
     public function add()
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lythframe WHERE unit_name = '$this->unit_name' AND spell_name_en = '$this->spell_name_en'");
+        $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lythframe WHERE unit_name = '$this->unit_name' AND spell_name_en = '$this->spell_name_en' AND frame_delay_hit = '$this->frame_delay_hit'");
         if (!empty($results)) {
             die(json_encode(array(
                 'return' => false,

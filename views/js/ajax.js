@@ -6,7 +6,7 @@ jQuery(document).ready( function($){
         $closeMessage = $('.alert .icon-cancel-circled'),
         $formlist = $('#formlist');
 
-    var $count = 0;
+    // var $count = 0;
 
     $addToForm.submit(function(e) {
         btnAddLoade(false);
@@ -74,6 +74,7 @@ jQuery(document).ready( function($){
                         console.log(data.message);
                         $success.html(data.message);
                         $success.parent().css('display', 'block');
+                        $('#formlist')[0].reset();
                         $('#formlist div div[id^=formlist_item]').remove();
                         $('#add_list tr[id^=add_list_item_]').remove();
                         console.log(data.datapost);
@@ -154,8 +155,12 @@ jQuery(document).ready( function($){
     function addtolist(data) {
         var $formListContent = $('#formlist div');
         var $list = $('#add_list');
+        var $count = $("div[id^=formlist_item]").length;
+        if ($count == null) {
+            $count = 0;
+        }
         // add in form
-        $('<div id="formlist_item_'+$count+'">'+
+        $('<div id="formlist_item_'+$count+'" class="items_form">'+
             '<input type="hidden" name="save_unit_name['+$count+']" value="'+data.unit_name+'">'+
             '<input type="hidden" name="save_image_url['+$count+']" value="'+data.image_url+'">'+
             '<input type="hidden" name="save_url_post['+$count+']" value="'+data.url_post+'">'+
@@ -195,7 +200,6 @@ jQuery(document).ready( function($){
                 '<span class="save_frame_pattern">'+data.frame_pattern+'</span>'+
             '</th>'+
         '</tr>').appendTo($list);
-        $count++;
     };
 
     $closeMessage.on('click', function(e){
