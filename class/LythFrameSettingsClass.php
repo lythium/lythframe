@@ -36,19 +36,30 @@ class LythFrameSettings
     public function add()
     {
         global $wpdb;
-        $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lythframe WHERE unit_name = '$this->unit_name' AND spell_name_en = '$this->spell_name_en' AND frame_delay_hit = '$this->frame_delay_hit'");
+        $results = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}lythframe WHERE unit_name = '$this->unit_name'");
         if (!empty($results)) {
-            die(json_encode(array(
-                'return' => false,
-                'error' => 'Unit already exists'
-            )));
+            foreach ($results as $row) {
+                if (($this->spell_name_en === $row->spell_name_en) && ($this->frame_pattern === $row->frame_pattern) && ($this->hits === $row->hits)) {
+                    return false;
+                }
+            }
+        };
+        if (!empty($this->url_post)) {
+            $url_post = $this->url_post;
+        } else {
+            $url_post = '';
+        };
+        if (!empty($this->spell_name_fr)) {
+            $spell_name_fr = $this->spell_name_fr;
+        } else {
+            $spell_name_fr = '';
         };
         $args = array(
             'unit_name' => $this->unit_name,
             'image_url' => $this->image_url,
-            'url_post' => $this->url_post,
+            'url_post' => $url_post,
             'spell_name_en' => $this->spell_name_en,
-            'spell_name_fr' => $this->spell_name_fr,
+            'spell_name_fr' => $spell_name_fr,
             'hits' => $this->hits,
             'spell_frame' => $this->spell_frame,
             'frame_delay_hit' => $this->frame_delay_hit,

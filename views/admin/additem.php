@@ -109,7 +109,7 @@
             </tfoot>
         </table>
         <form id="formlist" method="post" action="<?= admin_url('admin.php?page=lythframeadd') ?>">
-            <div>
+            <div class="itemlist">
                 <!-- Item -->
             </div>
             <button id="save_btn" type="submit" class="btn btn-info" value="Save"><i class="icon-spin5 animate-spin"></i><span class="icon_text">Add</span></button>

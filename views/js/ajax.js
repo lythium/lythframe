@@ -153,7 +153,7 @@ jQuery(document).ready( function($){
 
 
     function addtolist(data) {
-        var $formListContent = $('#formlist div');
+        var $formListContent = $('#formlist div.itemlist');
         var $list = $('#add_list');
         var $count = $("div[id^=formlist_item]").length;
         if ($count == null) {

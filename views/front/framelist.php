@@ -24,7 +24,11 @@
                             </th>
 
                             <th class="table_cel name">
-                                <span><?php echo $row->unit_name ?></span>
+                                <?php if (!empty($row->image_url)): ?>
+                                    <a href="<?php echo $row->image_url ?>" target="_blank" rel=""><?php echo $row->unit_name ?></a>
+                                <?php else: ?>
+                                    <span><?php echo $row->unit_name ?></span>
+                                <?php endif; ?>
                             </th>
 
                             <th class="table_cel spell_name">

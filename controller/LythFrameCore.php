@@ -38,10 +38,7 @@ class LythFrameCore
                 $obj->frame_pattern = $_POST['save_frame_pattern'][$a];
 
                 if (!$obj->add()) {
-                    die(json_encode(array(
-                        'return' => false,
-                        'error' => 'add failed'
-                    )));
+                    continue;
                 }
             };
             die(json_encode(array(
