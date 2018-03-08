@@ -19,8 +19,8 @@
                     <?php foreach ($listForFrame['list'] as $row): ?>
                         <tr class="table_row">
                             <th class="table_cel image_unit">
-                                <?php $image_alt = LythFrameCore::image_alt_by_url($row->image_url); ?>
-                                <img class="aligncenter size-full wp-image-1363" src="<?php echo $row->image_url ?>" alt="<?php echo $image_alt ?>" width="90" height="85" />
+                                <?php $image_id = LythFrameCore::image_id_by_url($row->image_url); ?>
+                                <?php echo wp_get_attachment_image( $image_id, 'thumbnail'); ?>
                             </th>
 
                             <th class="table_cel name">
