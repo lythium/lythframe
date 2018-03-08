@@ -18,7 +18,7 @@ class LythFrameTools
     }
     public static function isGenericName($name)
     {
-        return preg_match("/^[a-zA-ZÀ-ÿ'. +-]+$/", $name);
+        return preg_match("/^[a-zA-ZÀ-ÿ0-9'. +-]+$/", $name);
     }
     public static function isPattern( string $pattern, int $hit_count)
     {
