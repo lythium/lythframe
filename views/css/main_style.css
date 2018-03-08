@@ -25,6 +25,7 @@
     justify-content: center;
     align-items: center;
     border: 1px solid #555!important;
+    text-align: center;
 }
 #lythframe .table_cel.image_unit {
     width: 10%!important;

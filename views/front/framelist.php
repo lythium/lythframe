@@ -24,8 +24,8 @@
                             </th>
 
                             <th class="table_cel name">
-                                <?php if (!empty($row->image_url)): ?>
-                                    <a href="<?php echo $row->image_url ?>" target="_blank" rel=""><?php echo $row->unit_name ?></a>
+                                <?php if (!empty($row->url_post)): ?>
+                                    <a href="<?php echo $row->url_post ?>" target="_blank" rel=""><?php echo $row->unit_name ?></a>
                                 <?php else: ?>
                                     <span><?php echo $row->unit_name ?></span>
                                 <?php endif; ?>
