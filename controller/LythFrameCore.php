@@ -132,4 +132,16 @@ class LythFrameCore
         wp_enqueue_media();
     }
 
+    public static function image_alt_by_url( $image_url ) {
+        global $wpdb;
+
+        if( empty( $image_url ) ) {
+            return false;
+        }
+
+        $query_arr = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
+        $image_id = (!empty( $query_arr )) ? $query_arr[0] : 0;
+
+        return get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+    }
 }
