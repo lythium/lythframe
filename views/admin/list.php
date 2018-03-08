@@ -22,7 +22,7 @@
                  <i class="icon-cancel-circled"></i>
              </div>
          </div>
-         <span>Shortcode : <strong>[lythframe]</strong></span>
+         <span>Shortcode : <strong>[LythFrame]</strong></span>
          <br>
          <br>
         <?php if (isset($_GET['id_item']) && !empty($_GET['id_item']) && $_GET['button'] == "update") : ?>

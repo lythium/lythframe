@@ -33,7 +33,7 @@ class LythFrame
         add_action('admin_enqueue_scripts', array($this, 'framedelay_scripts_admin' ));
         add_action('wp_enqueue_scripts', array($this, 'framedelay_scripts' ));
 
-        add_shortcode('lythframe', array($this, 'lythframe_shortcode'));
+        add_shortcode('LythFrame', array($this, 'lythframe_shortcode'));
 
         include_once plugin_dir_path(__FILE__).'class/LythFrameSettingsClass.php';
         new LythFrameSettings();
@@ -151,12 +151,13 @@ class LythFrame
 
 
 
-    static function lythframe_shortcode()
+    public static function lythframe_shortcode()
     {
         include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+        new LythFrameCore();
         $multiList = LythFrameCore::getListFront();
         ob_start();
-        include_once plugin_dir_path(__FILE__).'views/front/framelist.php';
+        include plugin_dir_path(__FILE__).'views/front/framelist.php';
 		return ob_get_clean();
     }
     static function framedelay_scripts()
