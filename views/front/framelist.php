@@ -28,9 +28,8 @@
                             </th>
 
                             <th class="table_cel spell_name">
-                                <span><?php echo $row->spell_name_en ?></span>
-                                <br>
-                                <span><?php echo $row->spell_name_fr ?></span>
+                                <span><?php echo $row->spell_name_en ?></span>   
+                                <span>(<?php echo $row->spell_name_fr ?>)</span>
                             </th>
 
                             <th class="table_cel hits">
