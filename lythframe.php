@@ -30,7 +30,9 @@ class LythFrame
         add_action('admin_menu', array($this,'add_admin_menu'));
         add_action('admin_bar_menu', array($this, 'custom_toolbar_link'), 999);
 
-        add_action('admin_enqueue_scripts', array($this, 'framedelay_scripts_admin' ));
+        if ($_GET['page'] == 'lythframelist' || $_GET['page'] == 'lythframeadd') {
+            add_action('admin_enqueue_scripts', array($this, 'framedelay_scripts_admin' ));
+        }
         add_action('wp_enqueue_scripts', array($this, 'framedelay_scripts' ));
 
         add_shortcode('LythFrame', array($this, 'lythframe_shortcode'));
