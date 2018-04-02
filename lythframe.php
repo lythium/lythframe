@@ -162,19 +162,19 @@ class LythFrame
     }
     static function framedelay_scripts()
     {
-        wp_register_style( 'lythframecss', plugin_dir_url(__FILE__) . '/wp-content/plugins/lythframe/views/css/main_style.css' );
+        wp_register_style( 'lythframecss', get_site_url() . '/wp-content/plugins/lythframe/views/css/main_style.css' );
         wp_enqueue_style( 'lythframecss' );
-        wp_enqueue_script( 'lythframejs', plugin_dir_url(__FILE__) . '/wp-content/plugins/lythframe/views/js/main.js', array(), false, true );
+        wp_enqueue_script( 'lythframejs', get_site_url() . '/wp-content/plugins/lythframe/views/js/main.js', array(), false, true );
         wp_enqueue_script( 'lythframejs' );
     }
     static function framedelay_scripts_admin()
     {
         // Ajax
-        wp_register_script( 'ajaxHandle', plugin_dir_url(__FILE__) . '/wp-content/plugins/lythframe/views/js/ajax.js', array(), false, true );
+        wp_register_script( 'ajaxHandle', get_site_url() . '/wp-content/plugins/lythframe/views/js/ajax.js', array(), false, true );
         wp_enqueue_script( 'ajaxHandle' );
         wp_localize_script( 'ajaxHandle', 'ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
         // CSS
-        wp_register_style( 'lythframeadmincss', plugin_dir_url(__FILE__) . '/wp-content/plugins/lythframe/views/css/main_admin_style.css' );
+        wp_register_style( 'lythframeadmincss', get_site_url() . '/wp-content/plugins/lythframe/views/css/main_admin_style.css' );
         wp_enqueue_style( 'lythframeadmincss' );
     }
 
